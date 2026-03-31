@@ -14,7 +14,6 @@ async function fixAllPosters() {
     const client = await pool.connect();
 
     try {
-        // TMDB images - they load fine in browsers, just not from this server
         const updates = [
             { title: 'Интерстеллар', poster: 'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg', backdrop: 'https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5fK1DVfjko.jpg' },
             { title: 'Начало', poster: 'https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg', backdrop: 'https://image.tmdb.org/t/p/original/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg' },

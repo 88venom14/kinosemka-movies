@@ -4,7 +4,7 @@ import { Seat } from '../../types';
 
 interface SeatSelectorProps {
   seats: Seat[];
-  selectedSeats: string[]; // Array of seat IDs
+  selectedSeats: string[];
   onSeatSelect: (seatId: string) => void;
 }
 
@@ -13,7 +13,6 @@ const SeatSelector: React.FC<SeatSelectorProps> = ({
   selectedSeats,
   onSeatSelect,
 }) => {
-  // Group seats by row
   const seatsByRow = seats.reduce((acc: Record<string, Seat[]>, seat) => {
     if (!acc[seat.row]) {
       acc[seat.row] = [];
@@ -31,18 +30,15 @@ const SeatSelector: React.FC<SeatSelectorProps> = ({
 
   const isSelected = (seatId: string) => selectedSeats.includes(seatId);
 
-  // Get all seat numbers for display
   const allSeatNumbers = Array.from({ length: 12 }, (_, i) => i + 1);
 
   return (
     <div className="w-full">
-      {/* Screen representation */}
       <div className="mb-4 md:mb-8 text-center">
         <p className="text-xs text-cs-text-secondary uppercase tracking-widest mb-2">Экран</p>
         <div className="w-3/4 h-1 bg-gradient-to-r from-transparent via-cs-accent to-transparent mx-auto" />
       </div>
 
-      {/* Seat map */}
       <div className="flex justify-center overflow-x-auto pb-4">
         <div className="inline-block min-w-fit">
           {sortedRows.map((row) => {
@@ -100,7 +96,6 @@ const SeatSelector: React.FC<SeatSelectorProps> = ({
             );
           })}
 
-          {/* Column numbers */}
           <div className="flex gap-0.5 md:gap-1 mt-2" style={{ marginLeft: '1.5rem' }}>
             {allSeatNumbers.map((num) => (
               <span

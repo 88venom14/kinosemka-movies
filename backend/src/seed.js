@@ -16,7 +16,6 @@ async function seed() {
     try {
         await client.query('BEGIN');
 
-        // Check if already seeded
         const { rows } = await client.query('SELECT COUNT(*) FROM movies');
         if (parseInt(rows[0].count) > 0) {
             console.log('Database already seeded. Skipping.');
@@ -24,7 +23,6 @@ async function seed() {
             return;
         }
 
-        // Insert movies
         const movies = [
             { title: 'Интерстеллар', description: 'Когда засуха, пыльные бури и вымирание растений приводят человечество к продовольственному кризису, команда исследователей и учёных отправляется сквозь червоточину в поисках нового дома.', duration: 169, poster_url: 'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg', backdrop_url: 'https://image.tmdb.org/t/p/original/xJHokMbljvjADYdit5fK1DVfjko.jpg', rating: 8.6, release_date: '2014-11-07', director: 'Кристофер Нолан', cast: ['Мэттью Макконахи', 'Энн Хэтэуэй', 'Джессика Честейн'], genres: ['фантастика', 'драма', 'приключения'] },
             { title: 'Начало', description: 'Кобб — талантливый вор, лучший из лучших в опасном искусстве извлечения — кражи ценных секретов из глубин подсознания во время сна.', duration: 148, poster_url: 'https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg', backdrop_url: 'https://image.tmdb.org/t/p/original/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg', rating: 8.7, release_date: '2010-07-16', director: 'Кристофер Нолан', cast: ['Леонардо ДиКаприо', 'Джозеф Гордон-Левитт', 'Эллиот Пейдж'], genres: ['фантастика', 'боевик', 'триллер'] },
@@ -45,7 +43,6 @@ async function seed() {
         }
         console.log('✓ Movies inserted');
 
-        // Insert halls
         const hall1 = await client.query(
             `INSERT INTO halls (name, total_rows, seats_per_row) VALUES ('Зал 1', 8, 12) RETURNING id`
         );
@@ -57,7 +54,6 @@ async function seed() {
         );
         console.log('✓ Halls inserted');
 
-        // Insert seats for each hall
         const halls = [
             { id: hall1.rows[0].id, rows: 8, cols: 12, vipRows: ['G', 'H'] },
             { id: hall2.rows[0].id, rows: 8, cols: 12, vipRows: ['G', 'H'] },
@@ -81,7 +77,6 @@ async function seed() {
         }
         console.log('✓ Seats inserted');
 
-        // Insert sessions (next 7 days)
         const movieResult = await client.query('SELECT id FROM movies');
         const movieIds = movieResult.rows.map(r => r.id);
         const times = [
@@ -104,7 +99,6 @@ async function seed() {
                     const sessionDate = new Date(date);
                     sessionDate.setHours(time.hour, time.minute, 0, 0);
 
-                    // Skip if in the past
                     if (sessionDate <= new Date()) continue;
 
                     const hallId = hallIds[t % hallIds.length];
@@ -119,12 +113,10 @@ async function seed() {
         }
         console.log('✓ Sessions inserted');
 
-        // Populate session_seats
         const sessionsResult = await client.query('SELECT id, hall_id FROM sessions');
         for (const session of sessionsResult.rows) {
             const seatsResult = await client.query('SELECT id FROM seats WHERE hall_id = $1', [session.hall_id]);
             for (const seat of seatsResult.rows) {
-                // Randomly occupy ~15% of seats
                 const isOccupied = Math.random() < 0.15;
                 await client.query(
                     `INSERT INTO session_seats (session_id, seat_id, status)
@@ -135,7 +127,6 @@ async function seed() {
         }
         console.log('✓ Session seats populated');
 
-        // Insert test users
         const bcrypt = await import('bcrypt');
         const adminHash = await bcrypt.hash('admin123', 10);
         const userHash = await bcrypt.hash('user123', 10);

@@ -20,7 +20,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   return (
     <div className="space-y-8">
-      {/* User Info */}
       <div className="border border-cs-border p-6 bg-cs-dark">
         <h2 className="text-xl text-white mb-4">Аккаунт</h2>
         <div className="grid md:grid-cols-3 gap-6">
@@ -41,7 +40,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
-      {/* Active Bookings */}
       {activeBookings.length > 0 && (
         <div>
           <h3 className="text-lg text-white mb-4">Активные бронирования</h3>
@@ -53,7 +51,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       )}
 
-      {/* Past Bookings */}
       {pastBookings.length > 0 && (
         <div>
           <h3 className="text-lg text-white mb-4">История</h3>

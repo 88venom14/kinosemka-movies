@@ -31,7 +31,6 @@ export const Modal: React.FC<ModalProps> = ({
         }
     }, [onClose]);
 
-    // Trap focus inside modal
     const handleTabKey = useCallback((e: KeyboardEvent) => {
         if (!modalRef.current || e.key !== 'Tab') return;
 
@@ -60,7 +59,6 @@ export const Modal: React.FC<ModalProps> = ({
             document.addEventListener('keydown', handleKeyDown);
             document.addEventListener('keydown', handleTabKey);
 
-            // Focus first focusable element
             setTimeout(() => {
                 modalRef.current?.querySelector<HTMLElement>('button, input, [href]')?.focus();
             }, 100);
@@ -80,7 +78,6 @@ export const Modal: React.FC<ModalProps> = ({
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -90,7 +87,6 @@ export const Modal: React.FC<ModalProps> = ({
                         aria-hidden="true"
                     />
 
-                    {/* Modal */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}

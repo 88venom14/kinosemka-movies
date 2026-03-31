@@ -134,14 +134,12 @@ const BookMovie = () => {
     return (
         <div className="min-h-screen py-4 md:py-8 px-4">
             <div className="max-w-6xl mx-auto">
-                {/* Movie Info */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="mb-6 md:mb-8"
                 >
                     <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-6">
-                        {/* Poster */}
                         <div className="w-32 md:w-48 flex-shrink-0 mx-auto md:mx-0">
                             <div className="aspect-[2/3] overflow-hidden border border-cs-border bg-cs-dark">
                                 <img
@@ -155,7 +153,6 @@ const BookMovie = () => {
                             </div>
                         </div>
 
-                        {/* Info */}
                         <div className="flex-1 text-center md:text-left">
                             <h1 className="text-xl md:text-3xl font-light text-white mb-2">{movie.title}</h1>
                             <p className="text-sm md:text-base text-cs-text-secondary mb-4">
@@ -192,9 +189,7 @@ const BookMovie = () => {
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-                    {/* Left: Showtimes & Seats */}
                     <div className="space-y-6 md:space-y-8">
-                        {/* Showtimes */}
                         <div className="border border-cs-border p-4 md:p-6 bg-cs-dark">
                             <h2 className="text-base md:text-lg text-white mb-4">Выберите сеанс</h2>
                             <div className="flex flex-wrap gap-2">
@@ -220,7 +215,6 @@ const BookMovie = () => {
                             </div>
                         </div>
 
-                        {/* Seat Selector */}
                         {selectedShowtime && (
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -257,7 +251,6 @@ const BookMovie = () => {
                         )}
                     </div>
 
-                    {/* Right: Summary */}
                     <div>
                         <div className="border border-cs-border p-4 md:p-6 bg-cs-dark lg:sticky lg:top-8">
                             <h2 className="text-base md:text-lg text-white mb-4">Итого</h2>
@@ -302,7 +295,6 @@ const BookMovie = () => {
                 </div>
             </div>
 
-            {/* Success Modal */}
             <Modal isOpen={bookingModalOpen} onClose={() => { setBookingModalOpen(false); navigate('/dashboard'); }}>
                 <div className="text-center">
                     <div className="w-16 h-16 border-2 border-white rounded-full flex items-center justify-center mx-auto mb-4">

@@ -16,7 +16,6 @@ export const DigitalTicket: React.FC<DigitalTicketProps> = ({
 }) => {
   if (!booking) return null;
 
-  // Генерируем уникальные данные для QR-кода
   const qrData = JSON.stringify({
     bookingId: booking._id,
     showtimeId: booking.showtimeId,
@@ -27,9 +26,8 @@ export const DigitalTicket: React.FC<DigitalTicketProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Ваш билет" size="md">
-      <div className="text-center">
-        {/* QR Code */}
-        <div className="w-52 h-52 mx-auto mb-8 bg-white p-1 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-52 h-52 mx-auto mb-8 bg-white p-1 flex items-center justify-center">
           <QRCodeSVG
             value={qrData}
             size={200}
@@ -38,8 +36,7 @@ export const DigitalTicket: React.FC<DigitalTicketProps> = ({
           />
         </div>
 
-        {/* Ticket Info */}
-        <div className="border-t border-b border-cs-border py-6 mb-6">
+          <div className="border-t border-b border-cs-border py-6 mb-6">
           <p className="text-sm text-cs-text-secondary mb-2">Номер заказа</p>
           <p className="text-xl text-white font-mono mb-4">
             {booking._id.slice(-12).toUpperCase()}

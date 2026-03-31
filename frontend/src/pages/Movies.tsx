@@ -30,11 +30,9 @@ const Movies = () => {
   return (
     <div className="min-h-screen py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-light text-white">Фильмы</h1>
           
-          {/* Filter Tabs */}
           <div className="flex gap-2">
             <button
               onClick={() => setFilter('now-playing')}
@@ -59,7 +57,6 @@ const Movies = () => {
           </div>
         </div>
 
-        {/* Movies Grid */}
         {loading ? (
           <div className="flex justify-center py-20">
             <LoadingSpinner size="lg" text="Загрузка фильмов..." />
@@ -71,7 +68,7 @@ const Movies = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {movies
-              .filter(movie => movie.posterUrl || movie.backdropUrl) // Фильтруем фильмы без изображений
+              .filter(movie => movie.posterUrl || movie.backdropUrl)
               .map((movie, index) => (
                 <motion.div
                   key={movie._id}

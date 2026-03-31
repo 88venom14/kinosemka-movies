@@ -11,7 +11,6 @@ const JWT_SECRET = 'cineselect-secret-key-change-in-production';
 app.use(cors());
 app.use(express.json());
 
-// ─── Middleware ──────────────────────────────────────────────
 
 const authenticate = (req, res, next) => {
     const token = req.headers.authorization?.split(' ')[1];
@@ -25,7 +24,6 @@ const authenticate = (req, res, next) => {
     }
 };
 
-// ─── Movies ──────────────────────────────────────────────────
 
 app.get('/api/movies', async (req, res) => {
     try {
@@ -79,7 +77,6 @@ app.get('/api/movies/:id', async (req, res) => {
     }
 });
 
-// ─── Sessions ────────────────────────────────────────────────
 
 app.get('/api/showtimes', async (req, res) => {
     try {
@@ -144,7 +141,6 @@ app.get('/api/showtimes/:id', async (req, res) => {
     }
 });
 
-// ─── Seats ───────────────────────────────────────────────────
 
 app.get('/api/seats', async (req, res) => {
     try {
@@ -173,7 +169,6 @@ app.get('/api/seats', async (req, res) => {
     }
 });
 
-// ─── Auth ────────────────────────────────────────────────────
 
 app.post('/api/auth/login', async (req, res) => {
     try {
@@ -225,7 +220,6 @@ app.get('/api/auth/profile', authenticate, async (req, res) => {
     }
 });
 
-// ─── Bookings ────────────────────────────────────────────────
 
 app.get('/api/bookings', authenticate, async (req, res) => {
     try {
@@ -277,7 +271,6 @@ app.post('/api/bookings', authenticate, async (req, res) => {
     try {
         const { showtimeId, seats: seatIds } = req.body;
 
-        // Lock session seats
         const { rows: lockedSeats } = await client.query(
             `SELECT ss.id, ss.status FROM session_seats ss
              WHERE ss.session_id = $1 AND ss.seat_id = ANY($2::bigint[])
@@ -290,7 +283,6 @@ app.post('/api/bookings', authenticate, async (req, res) => {
             return res.status(409).json({ error: 'Некоторые места уже заняты' });
         }
 
-        // Get seat info for pricing
         const { rows: seatInfo } = await client.query(
             `SELECT s.id, s.price_multiplier FROM seats s WHERE s.id = ANY($1::bigint[])`,
             [seatIds.map(id => parseInt(id))]
@@ -302,7 +294,6 @@ app.post('/api/bookings', authenticate, async (req, res) => {
 
         const totalPrice = seatInfo.reduce((sum, s) => sum + basePrice * parseFloat(s.price_multiplier), 0);
 
-        // Create booking
         const { rows: bookingRows } = await client.query(
             `INSERT INTO bookings (user_id, session_id, status, total_price)
              VALUES ($1, $2, 'confirmed', $3) RETURNING id`,
@@ -310,7 +301,6 @@ app.post('/api/bookings', authenticate, async (req, res) => {
         );
         const bookingId = bookingRows[0].id;
 
-        // Create booking items
         for (const seat of seatInfo) {
             await client.query(
                 'INSERT INTO booking_items (booking_id, seat_id, price) VALUES ($1, $2, $3)',
@@ -318,14 +308,12 @@ app.post('/api/bookings', authenticate, async (req, res) => {
             );
         }
 
-        // Update seat statuses
         await client.query(
             `UPDATE session_seats SET status = 'sold'
              WHERE session_id = $1 AND seat_id = ANY($2::bigint[])`,
             [parseInt(showtimeId), seatIds.map(id => parseInt(id))]
         );
 
-        // Return booking
         const { rows: result } = await client.query(
             `SELECT b.id, b.user_id, b.session_id, b.status, b.total_price, b.created_at
              FROM bookings b WHERE b.id = $1`,
@@ -373,7 +361,6 @@ app.delete('/api/bookings/:id', authenticate, async (req, res) => {
     }
 });
 
-// ─── Start ───────────────────────────────────────────────────
 
 app.listen(PORT, () => {
     console.log(`🚀 CineSelect API running on http://localhost:${PORT}`);

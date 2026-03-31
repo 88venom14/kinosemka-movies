@@ -7,8 +7,6 @@ const sequelize = new Sequelize('moviesdatabase', 'postgres', 'admin', {
     logging: false,
 });
 
-// ─── Models ──────────────────────────────────────────────────
-
 export const User = sequelize.define('User', {
     id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING(100), allowNull: false },
@@ -85,8 +83,6 @@ export const BookingItem = sequelize.define('BookingItem', {
     seat_id: { type: DataTypes.BIGINT, allowNull: false },
     price: { type: DataTypes.DECIMAL(8, 2), allowNull: false },
 }, { tableName: 'booking_items', timestamps: false });
-
-// ─── Relations ───────────────────────────────────────────────
 
 Movie.hasMany(Session, { foreignKey: 'movie_id' });
 Session.belongsTo(Movie, { foreignKey: 'movie_id' });

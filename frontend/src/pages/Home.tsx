@@ -9,7 +9,6 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
       <section className="relative h-[70vh] md:h-[95vh] flex items-center justify-center border-b border-cs-border">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30" />
         <div className="relative z-10 text-center px-4">
@@ -60,7 +59,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="py-12 md:py-20 px-4 border-b border-cs-border">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
@@ -94,7 +92,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-12 md:py-20 px-4 text-center border-b border-cs-border">
         {!isAuthenticated ? (
           <>

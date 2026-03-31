@@ -16,10 +16,20 @@ Premium Cinema Booking Platform — система бронирования ки
 
 Проект использует **PostgreSQL** в качестве основной базы данных.
 
+#### Установка PostgreSQL
+
+1. Скачайте установщик с [postgresql.org](https://www.postgresql.org/download/windows/)
+2. Запустите установщик, выберите компоненты (PostgreSQL Server, pgAdmin, Command Line Tools)
+3. При установке задайте пароль `admin` для пользователя `postgres`
+4. После установки проверьте подключение:
+   ```bash
+   psql -U postgres -c "SELECT version();"
+   ```
+
 #### Создание базы данных
 
-```sql
-CREATE DATABASE moviesdatabase;
+```bash
+psql -U postgres -c "CREATE DATABASE moviesdatabase;"
 ```
 
 > Параметры подключения по умолчанию:
