@@ -87,4 +87,4 @@ src/
     └── globals.css         # Глобальные стили
 ```
 
-
+https://docs.google.com/presentation/d/1paHr5aNMsX1Kdd0XcQ8kIY4OxanmGIz-_ByxW6ZeEd8/edit?usp=drivesdk
