@@ -6,7 +6,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         const { showtimeId } = req.query;
         if (!showtimeId) return res.status(400).json({ error: 'showtimeId required' });
-        const result = query(`SELECT ss.id as seat_id, ss.session_id, s.row_letter, s.seat_number, s.seat_type, ss.status, s.price_multiplier FROM session_seats ss JOIN seats s ON ss.seat_id = s.id WHERE ss.session_id = ? ORDER BY s.row_letter ASC, s.seat_number ASC`, [showtimeId]);
+        const result = query(`SELECT s.id as seat_id, ss.session_id, s.row_letter, s.seat_number, s.seat_type, ss.status, s.price_multiplier FROM session_seats ss JOIN seats s ON ss.seat_id = s.id WHERE ss.session_id = ? ORDER BY s.row_letter ASC, s.seat_number ASC`, [showtimeId]);
         const seats = (result.rows as Record<string, unknown>[]).map((row) => ({
             _id: String(row.seat_id), showtimeId: String(row.session_id), row: row.row_letter,
             number: row.seat_number, type: row.seat_type,

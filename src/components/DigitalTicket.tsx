@@ -15,8 +15,18 @@ export default function DigitalTicket({ booking, isOpen, onClose }: DigitalTicke
     return (
         <Modal isOpen={isOpen} onClose={onClose} title="Ваш билет" size="md">
             <div className="ticket">
-                <div className="ticket__qr-wrapper">
-                    <div style={{ width: 200, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 48 }}>🎬</div>
+                <div className="ticket__qr-wrapper" style={{ alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ textAlign: 'center', padding: '0 1rem' }}>
+                        <p style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--cs-black)', marginBottom: '0.5rem' }}>
+                            {booking.movieTitle || 'Фильм'}
+                        </p>
+                        {booking.showtime && (
+                            <p style={{ fontSize: '0.875rem', color: 'var(--cs-text-secondary)' }}>
+                                {new Date(booking.showtime.dateTime).toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })}{' '}
+                                {new Date(booking.showtime.dateTime).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 <div className="ticket__info">
                     <p className="ticket__order-label">Номер заказа</p>
