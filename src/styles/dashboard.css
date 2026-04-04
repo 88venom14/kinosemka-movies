@@ -1,0 +1,318 @@
+.dashboard-page {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.dashboard-page__inner {
+    max-width: 56rem;
+    margin: 0 auto;
+}
+
+.dashboard-page__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.dashboard-page__title {
+    font-size: 1.875rem;
+    font-weight: 300;
+    color: var(--cs-white);
+}
+
+.dashboard-page__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dashboard-card {
+    border: 1px solid var(--cs-border);
+    padding: 1.5rem;
+    background-color: var(--cs-dark);
+    margin-bottom: 2rem;
+}
+
+.dashboard-card__title {
+    font-size: 1.25rem;
+    color: var(--cs-white);
+    margin-bottom: 1rem;
+}
+
+.dashboard-card__info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .dashboard-card__info-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.dashboard-card__info-label {
+    font-size: 0.75rem;
+    color: var(--cs-text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.dashboard-card__info-value {
+    color: var(--cs-white);
+}
+
+.dashboard-section__title {
+    font-size: 1.125rem;
+    color: var(--cs-white);
+    margin-bottom: 1rem;
+}
+
+.booking-history {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.booking-history__empty {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--cs-text-secondary);
+}
+
+.booking-history__item {
+    border: 1px solid var(--cs-border);
+    padding: 1rem;
+    background-color: var(--cs-dark);
+}
+
+.booking-history__item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.booking-history__item-title {
+    color: var(--cs-white);
+    font-weight: 500;
+}
+
+.booking-history__item-date {
+    font-size: 0.875rem;
+    color: var(--cs-text-secondary);
+}
+
+.booking-history__item-right {
+    text-align: right;
+}
+
+.booking-history__status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+}
+
+.booking-history__status--confirmed {
+    background-color: var(--cs-white);
+    color: var(--cs-black);
+}
+
+.booking-history__status--cancelled {
+    background-color: var(--cs-border);
+    color: var(--cs-text-secondary);
+}
+
+.booking-history__status--other {
+    background-color: var(--cs-dark);
+    color: var(--cs-white);
+    border: 1px solid var(--cs-border);
+}
+
+.booking-history__price {
+    color: var(--cs-white);
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.booking-history__seats {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--cs-text-secondary);
+    margin-bottom: 1rem;
+}
+
+.booking-history__actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.booking-history__btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.booking-history__btn--primary {
+    background-color: var(--cs-white);
+    color: var(--cs-black);
+}
+
+.booking-history__btn--primary:hover {
+    background-color: var(--cs-gray-200);
+}
+
+.booking-history__btn--outline {
+    border: 1px solid var(--cs-border);
+    color: var(--cs-text-secondary);
+    background: transparent;
+}
+
+.booking-history__btn--outline:hover {
+    border-color: var(--cs-white);
+    color: var(--cs-white);
+}
+
+.ticket {
+    text-align: center;
+}
+
+.ticket__qr-wrapper {
+    width: 13rem;
+    height: 13rem;
+    margin: 0 auto 2rem;
+    background-color: var(--cs-white);
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket__info {
+    border-top: 1px solid var(--cs-border);
+    border-bottom: 1px solid var(--cs-border);
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.ticket__order-label {
+    font-size: 0.875rem;
+    color: var(--cs-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.ticket__order-id {
+    font-size: 1.25rem;
+    color: var(--cs-white);
+    font-family: monospace;
+    margin-bottom: 1rem;
+}
+
+.ticket__details-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.ticket__details-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ticket__details-label {
+    font-size: 0.75rem;
+    color: var(--cs-text-secondary);
+}
+
+.ticket__details-value {
+    color: var(--cs-white);
+}
+
+.ticket__details-hall {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.5rem;
+}
+
+.ticket__details-hall-label {
+    font-size: 1.125rem;
+    color: var(--cs-text-secondary);
+    font-weight: 500;
+}
+
+.ticket__details-hall-number {
+    font-size: 1.875rem;
+    color: var(--cs-white);
+    font-weight: 700;
+}
+
+.ticket__payment {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cs-border);
+}
+
+.ticket__payment-label {
+    font-size: 0.75rem;
+    color: var(--cs-text-secondary);
+}
+
+.ticket__payment-amount {
+    font-size: 1.5rem;
+    color: var(--cs-white);
+}
+
+.ticket__footer-text {
+    font-size: 0.75rem;
+    color: var(--cs-text-secondary);
+}
+
+.booking-confirm {
+    text-align: center;
+}
+
+.booking-confirm__icon {
+    width: 4rem;
+    height: 4rem;
+    border: 2px solid var(--cs-white);
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.booking-confirm__title {
+    font-size: 1.25rem;
+    color: var(--cs-white);
+    margin-bottom: 0.5rem;
+}
+
+.booking-confirm__text {
+    color: var(--cs-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.cancel-modal__text {
+    color: var(--cs-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.cancel-modal__text {
+    color: var(--cs-text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.cancel-modal__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}

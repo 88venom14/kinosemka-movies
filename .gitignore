@@ -7,9 +7,14 @@ node_modules/
 .env.*.local
 
 # Build outputs
+.next/
 dist/
 build/
 .vite/
+
+# SQLite database
+data/
+*.sqlite*
 
 # IDE
 .vscode/
@@ -20,9 +25,6 @@ build/
 # OS
 .DS_Store
 Thumbs.db
-
-# AdminJS bundle
-.adminjs/
 
 # Logs
 *.log
